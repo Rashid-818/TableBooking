@@ -1,0 +1,183 @@
+
+        :root {
+            --primary-gold: #D4A574;
+            --dark-brown: #2C1B14;
+            --light-cream: #F8F5F0;
+            --text-dark: #333;
+            --text-light: #666;
+            --success: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect fill="%232c1b14" width="1600" height="900"/><circle fill="%23d4a574" opacity="0.2" cx="400" cy="300" r="300"/><circle fill="%23f8f5f0" opacity="0.1" cx="1200" cy="500" r="400"/><path fill="%23d4a574" opacity="0.1" d="M100 700 Q500 600 900 750 Q1300 850 1500 700"/></svg>');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            font-weight: 700;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255,255,255,0.95) !important;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-gold) !important;
+        }
+        .py-3{
+            padding-top: 0rem !important;
+            padding-bottom: 3px !important;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Booking Form */
+        .booking-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+            border: 1px solid rgba(212,165,116,0.2);
+            transition: all 0.4s ease;
+        }
+
+        .booking-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 35px 80px rgba(0,0,0,0.2);
+        }
+
+        .time-slot {
+            padding: 1rem 1.5rem;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: white;
+        }
+
+        .time-slot:hover, .time-slot.selected {
+            border-color: var(--primary-gold);
+            background: linear-gradient(135deg, var(--primary-gold), #b5895e);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .time-slot.available {
+            border-color: var(--success);
+            background: rgba(40,167,69,0.1);
+        }
+
+        .time-slot.unavailable {
+            opacity: 0.5;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .time-slot.unavailable::after {
+            content: "Booked";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(220,53,69,0.9);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Tables Section */
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .table-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .table-status.available { border-left: 5px solid var(--success); }
+        .table-status.booked { border-left: 5px solid #dc3545; }
+
+        /* Admin Dashboard */
+        .admin-panel {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .booking-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .booking-item:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .fs-6{
+            color: black;
+        }
+        .fw-bold{
+            color: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .time-slots { 
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+        }
+    

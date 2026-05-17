@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book MyTable - Restaurant Booking</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-utensils me-2"></i>Book MyTable
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#booking">Book Table</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tables">Tables</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#admin" class="text-warning"><i
+                                class="fas fa-cogs me-1"></i>Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <h1 class="mb-4">Reserve Your Table</h1>
+                    <p class="lead fs-4 mb-5">Experience exquisite Italian cuisine in our elegant dining room. Book your
+                        table now and let us create a memorable evening for you.</p>
+                    <a href="#booking" class="btn btn-warning btn-lg px-5 py-3 rounded-pill shadow-lg fs-5">
+                        <i class="fas fa-calendar-check me-2"></i>Book Now
+                    </a>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="animate-float">
+                        <i class="fas fa-chair display-1 text-warning opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="text-center mb-5">
+                        <h2 class="display-4 fw-bold mb-3">Book Your Table</h2>
+                        <p class="lead text-muted">Select date, time and number of guests</p>
+                    </div>
+
+                    <div class="booking-card p-5">
+                        <form id="bookingForm">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Date *</label>
+                                    <input type="text" class="form-control form-control-lg" id="bookingDate"
+                                        placeholder="Select date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Time *</label>
+                                    <div id="timeSlots" class="time-slots d-grid gap-3 mt-2">
+                                        <!-- Time slots populated by JS -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Guests *</label>
+                                    <select class="form-select form-select-lg" id="numGuests" required>
+                                        <option value="">Select number</option>
+                                        <option value="1">1 Guest</option>
+                                        <option value="2">2 Guests</option>
+                                        <option value="3">3 Guests</option>
+                                        <option value="4">4 Guests</option>
+                                        <option value="5">5 Guests</option>
+                                        <option value="6">6+ Guests</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Table Preference</label>
+                                    <select class="form-select form-select-lg" id="tablePref">
+                                        <option value="">Any table</option>
+                                        <option value="window">Window view</option>
+                                        <option value="private">Private booth</option>
+                                        <option value="bar">Bar area</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Customer Details</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control form-control-lg" id="customerName"
+                                        placeholder="Full Name *" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control form-control-lg" id="customerPhone"
+                                        placeholder="Phone Number *" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="form-control" id="specialReq" rows="3"
+                                        placeholder="Special Requests (optional)"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit"
+                                        class="btn btn-warning btn-lg w-100 py-3 fs-4 fw-bold shadow-lg"
+                                        id="submitBooking">
+                                        <i class="fas fa-calendar-check me-2"></i>Confirm Booking
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tables Section -->
+    <section id="tables" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-3">Our Dining Areas</h2>
+                <p class="lead text-muted">Choose your preferred seating arrangement</p>
+            </div>
+            <div class="row g-4" id="tablesContainer">
+                <!-- Tables populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'><rect fill='%23f8f5f0' width='600' height='450'/><circle fill='%23d4a574' cx='300' cy='225' r='180' opacity='0.3'/><rect fill='white' x='350' y='120' width='200' height='210' rx='25'/></svg>"
+                        class="img-fluid rounded-4 shadow-lg" alt="Restaurant Interior">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold mb-4">About Book MyTable</h2>
+                    <p class="lead mb-4">Established in 2026, <strong>Book MyTable</strong> offers authentic Italian cuisine in an intimate
+                        50-seat dining room. Our team of passionate chefs creates memorable dining experiences using
+                        fresh, seasonal ingredients.</p>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="display-6 text-warning mb-2">50+</div>
+                                <div class="fw-bold">Tables</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="display-6 text-warning mb-2">98%</div>
+                                <div class="fw-bold">Bookings</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="display-6 text-warning mb-2">4.9</div>
+                                <div class="fw-bold">Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section id="admin" class="admin-panel">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="text-center mb-5">
+                        <h2 class="display-4 fw-bold mb-3">Admin Dashboard</h2>
+                        <p class="lead mb-0">Manage bookings and table availability</p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-3">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-4 p-4 text-center">
+                                <i class="fas fa-calendar-check fs-1 text-warning mb-3"></i>
+                                <div class="display-6 fw-bold" id="totalBookings">0</div>
+                                <div class="fs-6 opacity-75">Total Bookings</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-4 p-4 text-center">
+                                <i class="fas fa-chair fs-1 text-warning mb-3"></i>
+                                <div class="display-6 fw-bold text-success" id="availableTables">12</div>
+                                <div class="fs-6 opacity-75">Available Tables</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-4 p-4 text-center">
+                                <i class="fas fa-clock fs-1 text-warning mb-3"></i>
+                                <div class="display-6 fw-bold text-info" id="todayBookings">0</div>
+                                <div class="fs-6 opacity-75">Today's Bookings</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-4 p-4 text-center">
+                                <button class="btn btn-warning w-100" id="clearBookings">
+                                    <i class="fas fa-trash me-2"></i>Clear All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <h4 class="mb-4">Recent Bookings</h4>
+                        <div id="bookingsList">
+                            <!-- Bookings populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header border-0 bg-success text-white">
+                    <h5 class="modal-title"><i class="fas fa-check-circle me-2"></i>Booking Confirmed!</h5>
+                </div>
+                <div class="modal-body text-center p-5">
+                    <i class="fas fa-calendar-check fs-1 text-success mb-4"></i>
+                    <div id="bookingDetails" class="mb-4"></div>
+                    <p class="lead text-success">Your booking confirmation has been downloaded!</p>
+                    <button class="btn btn-success btn-lg" id="downloadConfirmation">
+                        <i class="fas fa-download me-2"></i>Download Again
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
